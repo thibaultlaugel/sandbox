@@ -1,0 +1,19 @@
+{
+  "name": "glose-api",
+  "version": "0.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thibaultlaugel/sandbox/glose-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/thibaultlaugel/sandbox/glose-api",
+  "dependencies": {
+    "restify": "^2.8.4",
+    "save": "^1.0.1"
+  }
+}
