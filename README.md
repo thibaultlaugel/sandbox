@@ -1,2 +1,2 @@
 # sandbox
-A few Machine Learning and programming projects I did
+A few minor Machine Learning and programming projects I did or am currently working on
