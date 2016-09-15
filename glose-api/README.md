@@ -1,12 +1,15 @@
 # glose-api
 
-Le script app.js présenté ici permet la création d'une API sur un serveur local (port 3000), répondant aux 4 endpoints demandés suivants:
-- POST ping: enregistrer un ping
-- GET pings: récupérer tous les pings
-- GET users/:idUser/pings: récupérer tous les pings d'un utilisateur
-- GET books/:idBook/pings: récupérer tous les pings d'un livre
+My first attempt at creating an API using javascript.
 
-En plus, un endpoint 'GET pings/:id: récupérer un ping donné' a été ajouté.
+Script app.js creates an API on a local server with the 4 following endpoints:
 
-Les pings doivent être entrés sous la forme:
+- POST ping: save a ping
+- GET pings: collect all pings
+- GET users/:idUser/pings: collect all pings corresponding to the user
+- GET books/:idBook/pings: collect all pings corresponding to the book
+
+Additionnally, an endpoint 'GET pings/:id: collect a given ping' was added.
+
+Pings have agree with the following format:
 {idUser = ; idBook = ; progress = ; timestamp = }
