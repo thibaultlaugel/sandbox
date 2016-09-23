@@ -74,9 +74,25 @@ def preprocess(df):
 		#New variables: be sure to comment lines you do not want to use
 		print('Creating new variables...')
 		df['raison_sociale_type'] = map(lambda x: x.split(' ')[0], df['raison_sociale'])
+
+		#dummies
 		#df_domaine_act = pd.get_dummies(df['domaine_activite'], prefix='domaine_activite', prefix_sep='_')
 		#df_departements = pd.get_dummies(df['departement'], prefix='departement', prefix_sep='_')
 		#df = pd.concat([df, df_domaine_act, df_departements], axis=1)
+
+
+		for col_ in ['raison_sociale', 'annee', 'departement']:#, ['raison_sociale', 'annee']]:
+			grp = df.groupby(col_)['jours_mco', 'jours_total'].agg(['count', 'mean', 'sum']).reset_index()
+			aa = [''.join(c).strip() for c in grp.columns.values]
+			grp.columns = [aa[0]] + [x + '_' + aa[0] for x in aa[1:]]
+
+			df = pd.merge(df, grp, left_on=col_, right_on=col_)
+		import pdb;pdb.set_trace()
+		
+
+
+
+
 		return df
 
 	def numeric_trash(df):
