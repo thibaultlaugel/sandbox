@@ -44,8 +44,6 @@ dtype = {'Finess':'str',
 
 
 
-
-
 '''
 LOAD DATASET
 '''
@@ -55,7 +53,6 @@ def load():
 	df.columns = ['finess', 'raison_sociale', 'departement', 'domaine_activite', 'age', 'jours_mco', 'jours_total', 'annee', 'cible1']
 	('Data imported. Shape: %s') %str(df.shape)
 	return df
-
 
 
 '''
@@ -102,7 +99,6 @@ def preprocess(df):
 	return df
 
 
-
 '''
 TRAIN TEST SPLIT
 '''
@@ -119,7 +115,6 @@ def train_test(df): #TODO
 	X_train = np.array(df[list(set(df.columns) - set(['cible1']))])
 	y_train = np.array(df['cible1'])
 	print('Train split done')
-
 
 
 '''
