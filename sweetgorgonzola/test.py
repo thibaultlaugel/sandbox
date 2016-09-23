@@ -153,8 +153,8 @@ def main_train():
 TEST
 '''
 def load_test():
-	df_test = pd.read_csv(join(source_data_folder, 'test2.csv'), sep=';', dtype=dtype)
-	df_test.columns = ['id', 'finess', 'raison_sociale', 'departement', 'domaine_activite', 'age', 'jours_mco', 'jours_total', 'annee']
+	df_test = pd.read_csv(join(source_data_folder, 'test2.csv'), sep=';', dtype=dtype, index_col=0)
+	df_test.columns = ['finess', 'raison_sociale', 'departement', 'domaine_activite', 'age', 'jours_mco', 'jours_total', 'annee']
 	('Data imported. Shape: %s') %str(df_test.shape)
 	return df_test
 
@@ -190,12 +190,17 @@ def preprocessing_test(df_test):
 def main_test():
 	df_test = load_test()
 	df_test = preprocessing_test(df_test)
-	X_test = df_test[df_test.columns[1:]]
+	#X_test = df_test[df_test.columns[1:]] plus besoin normalement
+	X_test, X0 = df_test[df_test['jours_mco'] > 0], df_test[df_test['jours_mco'] == 0]
+
 
 	#PREDICT AND OUTPUT
-	y_test = model.predict(X_test)
+	X_test['y_test'] = model.predict(X_test) #pour avoir l'index
+	X0['y_test'] = np.zeros(X0.shape[0])
+	y_test = X_test.append(X0).sort_index()['y_test']
+
 	sub = pd.DataFrame(columns=['id', 'cible'])
-	sub['id'] = df_test['id']
+	sub['id'] = df_test.index
 	sub['cible'] = y_test
 
 	sub.to_csv(join(output_data_folder, 'submission.csv'), index=False, sep=';')
